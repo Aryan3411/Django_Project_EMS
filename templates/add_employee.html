@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+  <div class="content"><br>
+    <div class="container">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h4>Add Employee</h4>
+          </div>
+          <div class="card-body">
+            {% if errmsg %}
+                <div class="alert alert-danger">
+                    {{errmsg}}
+                </div>
+            {% endif %}
+            {% if suc %}
+                <div class="alert alert-success">
+                  {{suc}}
+                </div>
+            {% endif %}
+            <form method="post" action="/add_employee">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="employeeName">Employee Name:</label>
+                <input type="text" class="form-control" id="employeeName" name="name">
+              </div><br>
+              <div class="form-group">
+                <label for="joinDate">Join Date:</label>
+                <input type="date" class="form-control" id="joinDate" name="joinDate">
+              </div><br>
+              <div class="form-group">
+                <label for="birthDate">Birth Date:</label>
+                <input type="date" class="form-control" id="birthDate" name="birthDate">
+              </div><br>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email">
+              </div><br>
+              <div class="form-group">
+                <label for="mobile">Mobile:</label>
+                <input type="text" class="form-control" id="mobile" name="mobile">
+              </div><br>
+              <div class="form-group">
+                <label for="salary">Salary:</label>
+                <input type="text" class="form-control" id="salary" name="salary">
+              </div><br>
+              <button type="submit" class="btn btn-success btn-sm">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>     
+  </div>
+{% endblock 'main' %}

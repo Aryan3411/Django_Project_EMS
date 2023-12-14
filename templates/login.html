@@ -1,0 +1,311 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-signin-client_id" content="763147943257-i8pmevjsljbnne91jenolgv2g8fuo63g.apps.googleusercontent.com">
+    <title>EMS | Login</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/ems1.jpg' %}" />	
+    <style>
+        body {
+		
+            font-family: Arial, sans-serif;		
+			background-image:url("https://i0.wp.com/ednep.com/wp-content/uploads/2020/06/Employee-Management.png?w=860&ssl=1");
+            background-size: contain;
+            margin: 0;
+			padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            max-width: 600px;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group input[type="submit"] {
+            width: 90%;
+            padding: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+			margin-bottom: 5px;
+        }
+        .btn.btn-danger {
+            --bs-btn-padding-y: .25rem;
+            --bs-btn-padding-x: .5rem;
+            --bs-btn-font-size: .75rem;
+        }
+
+        .gsi-material-button {
+            background-color: WHITE;
+            background-image: none;
+            border: 1px solid #747775;
+            -webkit-border-radius: 20px;
+            border-radius: 20px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: #1f1f1f;
+            cursor: pointer;
+            font-family: 'Roboto', arial, sans-serif;
+            font-size: 14px;
+            height: 40px;
+            letter-spacing: 0.25px;
+            outline: none;
+            overflow: hidden;
+            padding: 0 12px;
+            position: relative;
+            text-align: center;
+            -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
+            transition: background-color .218s, border-color .218s, box-shadow .218s;
+            vertical-align: middle;
+            white-space: nowrap;
+            width: auto;
+            max-width: 400px;
+            min-width: min-content;
+            }
+
+            .gsi-material-button .gsi-material-button-icon {
+            height: 20px;
+            margin-right: 12px;
+            min-width: 20px;
+            width: 20px;
+            }
+
+            .gsi-material-button .gsi-material-button-content-wrapper {
+            -webkit-align-items: center;
+            align-items: center;
+            display: flex;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            -webkit-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            height: 100%;
+            justify-content: space-between;
+            position: relative;
+            width: 100%;
+            }
+
+            .gsi-material-button .gsi-material-button-contents {
+            -webkit-flex-grow: 1;
+            flex-grow: 1;
+            font-family: 'Roboto', arial, sans-serif;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: top;
+            }
+
+            .gsi-material-button .gsi-material-button-state {
+            -webkit-transition: opacity .218s;
+            transition: opacity .218s;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            }
+
+            .gsi-material-button:disabled {
+            cursor: default;
+            background-color: #ffffff61;
+            border-color: #1f1f1f1f;
+            }
+
+            .gsi-material-button:disabled .gsi-material-button-contents {
+            opacity: 38%;
+            }
+
+            .gsi-material-button:disabled .gsi-material-button-icon {
+            opacity: 38%;
+            }
+
+            .gsi-material-button:not(:disabled):active .gsi-material-button-state, 
+            .gsi-material-button:not(:disabled):focus .gsi-material-button-state {
+            background-color: #303030;
+            opacity: 12%;
+            }
+
+            .gsi-material-button:not(:disabled):hover {
+            -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+            box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+            }
+
+            .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
+            background-color: #303030;
+            opacity: 8%;
+            }
+    </style>
+</head>
+<script>
+    var YOUR_CLIENT_ID = '763147943257-i8pmevjsljbnne91jenolgv2g8fuo63g.apps.googleusercontent.com';
+    var YOUR_REDIRECT_URI = 'http://127.0.0.1:8000/login';
+    var fragmentString = location.hash.substring(1);
+
+    var params = {};
+    var regex = /([^&=]+)=([^&]*)/g, m;
+    while (m = regex.exec(fragmentString)) {
+    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+    }
+    if (Object.keys(params).length > 0) {
+    localStorage.setItem('oauth2-test-params', JSON.stringify(params) );
+    if (params['state'] && params['state'] == 'try_sample_request') {
+        trySampleRequest();
+    }
+    }
+
+    function trySampleRequest() {
+    var params = JSON.parse(localStorage.getItem('oauth2-test-params'));
+    if (params && params['access_token']) {
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open('GET', 'https://www.googleapis.com/oauth2/v2/userinfo');
+        xhr1.setRequestHeader('Authorization', 'Bearer ' + params['access_token']);
+        xhr1.onreadystatechange = function (e) {
+            if (xhr1.readyState === 4 && xhr1.status === 200) {
+                var responseObj = JSON.parse(xhr1.response);
+                var displayName = responseObj.name;
+                var emailaddress = responseObj.email;
+                name = displayName;
+                console.log(name);
+                email = emailaddress;
+
+                var xhr2 = new XMLHttpRequest();
+                var formData = new FormData();
+
+                formData.append('google_email', email);
+
+                xhr2.open('POST', 'google-login/', true);
+
+                // Retrieve the CSRF token from a hidden input field
+                var csrfToken = document.querySelector('input[name=csrfmiddlewaretoken]').value;
+                xhr2.setRequestHeader("X-CSRFToken", csrfToken);
+
+                xhr2.send(formData);
+
+                xhr2.onload = function () {
+                    if (xhr2.status === 200) {
+                        // Redirect to the home page
+                        window.location.href = '/home';
+                    } else {
+                        console.error('Failed to log in or register via Google');
+                    }
+                };
+                console.log(email);
+
+            } else if (xhr1.readyState === 4 && xhr1.status === 401) {
+                oauth2SignIn();
+            }
+        };
+        xhr1.send(null);
+    } else {
+        oauth2SignIn();
+    }
+}
+
+
+
+    function oauth2SignIn() {
+    var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+    var form = document.createElement('form');
+    form.setAttribute('method', 'GET'); // Send as a GET request.
+    form.setAttribute('action', oauth2Endpoint);
+    var params = {'client_id': YOUR_CLIENT_ID,
+                    'redirect_uri': YOUR_REDIRECT_URI,
+                    'scope': 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+                    'state': 'try_sample_request',
+                    'include_granted_scopes': 'true',
+                    'response_type': 'token'};
+    for (var p in params) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', p);
+        input.setAttribute('value', params[p]);
+        form.appendChild(input);
+    }
+    document.body.appendChild(form);
+    form.submit();
+    }
+</script>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Employee Management System Login</h2>
+            {% if errmsg %}
+                <div class="alert alert-danger">
+                    {{errmsg}}
+                </div>
+            {% endif %}
+            <form method="post" action="/login">
+              {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+				<br>
+                <div class="form-group">
+                    <input type="submit" value="Login">
+                </div>
+            </form>
+            <div class="form-group">
+                <button class="btn btn-danger btn-sm" onclick="window.location.href='/register'">Register</button>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button class="gsi-material-button" onclick="trySampleRequest();">
+                 <div class="gsi-material-button-state"></div>
+                 <div class="gsi-material-button-content-wrapper">
+                   <div class="gsi-material-button-icon">
+                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
+                       <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                       <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                       <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                       <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                       <path fill="none" d="M0 0h48v48H0z"></path>
+                     </svg>
+                   </div>
+                   <span class="gsi-material-button-contents">Sign in with Google</span>
+                   <span style="display: none;">Sign in with Google</span>
+                 </div>
+               </button>
+               </div>
+        </div>
+    </div>
+</body>
+</html>

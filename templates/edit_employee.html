@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+  <div class="content"><br>
+    <div class="container">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h4>Edit Employee</h4>
+          </div>
+          <div class="card-body">
+            {% if errmsg %}
+              <div class="alert alert-danger">
+                {{errmsg}}
+              </div>
+           {% endif %}
+              {% if edit == 1 %}
+                <form method="post" action="/edit_employee/{{data.id}}">
+              {% else %}
+              <form method="post" action="/edit_employeel/{{data.id}}">
+                {% endif %}
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="employeeName">Employee Name:</label>
+                <input type="text" class="form-control" id="employeeName" name="name" value="{{data.name}}">
+              </div><br>
+              <div class="form-group">
+                <label for="joinDate">Join Date:</label>
+                <input type="date" class="form-control" id="joinDate" name="joinDate" value="{{data.joinDate|date:'Y-m-d'}}">
+              </div><br>
+              <div class="form-group">
+                <label for="birthDate">Birth Date:</label>
+                <input type="date" class="form-control" id="birthDate" name="birthDate" value="{{ data.birthDate|date:'Y-m-d' }}">
+              </div><br>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{data.email}}">
+              </div><br>
+              <div class="form-group">
+                <label for="mobile">Mobile:</label>
+                <input type="text" class="form-control" id="mobile" name="mobile" value="{{data.mobile}}">
+              </div><br>
+              <div class="form-group">
+                <label for="salary">Salary:</label>
+                <input type="text" class="form-control" id="salary" name="salary" value="{{data.salary}}">
+              </div><br>
+              <button type="submit" class="btn btn-success btn-sm">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+{% endblock 'main' %}
